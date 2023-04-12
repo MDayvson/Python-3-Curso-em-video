@@ -1,0 +1,22 @@
+def leiaint(msg):
+    """
+    -> Verifica se um número é inteiro.
+    :param msg: número para verificar.
+    :return: o valor do número.
+    """
+    ok = False
+    valor = 0
+    while True:
+        n = str(input(msg))
+        if n.isnumeric():
+            valor = int(n)
+            ok = True
+        else:
+            print('\033[0;031mERRO! Digite um número inteiro válido\033[m')
+        if ok:
+            break
+    return valor
+
+
+n = leiaint('Digite um número: ')
+print(f'Voçê acabou de digitar o número {n}')
