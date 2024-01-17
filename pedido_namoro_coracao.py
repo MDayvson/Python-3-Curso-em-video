@@ -5,11 +5,20 @@ from tkinter import messagebox
 import threading
 import math
 from turtle import speed, bgcolor, goto, color, done
+import pygame
+import pathlib
+
+pygame.init()
 
 root = tk.Tk()
 root.title('Aceitas?')
 root.geometry('600x600')
 root.configure(background='#ffc8dd')
+
+# Adicione o caminho da sua música aqui
+CAMINHO_MUSICA = pathlib.Path(__file__).parent / 'Forever Star.mp3'
+music_path = CAMINHO_MUSICA
+pygame.mixer.music.load(music_path)
 
 def move_button_1(e):
     if abs(e.x - button_1.winfo_x()) < 50 and abs(e.y - button_1.winfo_y()) < 50:
@@ -19,16 +28,17 @@ def move_button_1(e):
 
 def accepted():
     messagebox.showinfo('Meu amor', 'Eu te amo meu amor, lanchinho mais tarde?')
-    threading.Timer(1, draw_heart).start()  # Aguarda 1 segundos antes de chamar a função draw_heart
+    threading.Timer(1, draw_heart).start()  # Aguarda 1 segundo antes de chamar a função draw_heart
 
 def denied():
     button_1.destroy()
     error_message()
 
 def error_message():
-    messagebox.showerror('Erro', 'Desculpe amor, você clicou na opção errada por engano. Tenta de novo.')
+    messagebox.showerror('Erro', 'Desculpe, você clicou na opção errada por engano. Tente novamente.')
 
 def draw_heart():
+    pygame.mixer.music.play()  # Inicia a reprodução da música
     speed(0)
     bgcolor('black')
     for i in range(100000):
